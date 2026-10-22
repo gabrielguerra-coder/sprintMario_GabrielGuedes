@@ -6,7 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elementos do Jogo
     const tails = document.querySelector('.tails');
     const pipe = document.querySelector('.pipe');
+
+    // Recupera o personagem escolhido na página personagem.php
+    const personagemEscolhido =
+    localStorage.getItem('personagemImagem') || 'assets/tails.gif';
+
+    const nomePersonagem =
+    localStorage.getItem('personagemNome') || 'Tails';
+
+    // Exibe o personagem selecionado
+    tails.src = personagemEscolhido;
+    tails.alt = nomePersonagem;
     const gameBoard = document.getElementById('game-board');
+    const personagemImagem =
+        localStorage.getItem('personagemImagem') || 'assets/tails.gif';
+
+    const personagemNome =
+        localStorage.getItem('personagemNome') || 'Tails';
     const hudPlayerName = document.getElementById('hud-player-name');
     const scoreDisplay = document.getElementById('score-display');
     const jumpTip = document.getElementById('jump-tip');
@@ -73,9 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reseta cano
         pipe.style.animation = '';
         pipe.style.left = '';
+        tails.src = personagemImagem;
+        tails.alt = personagemNome;
+
+        // Troca o cenário conforme o personagem escolhido
+        gameBoard.classList.toggle(
+            'sonic-world',
+            personagemNome.toLowerCase() === 'sonic'
+        );
 
         // Reseta Mario
-        tails.src = 'assets/tails.gif';
+        // Restaura o personagem escolhido
+        tails.src = personagemEscolhido;
+        tails.alt = nomePersonagem;
         tails.style.animation = '';
         tails.style.bottom = '0px';
         tails.style.width = '';
