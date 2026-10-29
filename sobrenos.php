@@ -285,6 +285,32 @@
                 font-size: 16px !important;
             }
         }
+        .requisitos-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 25px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .requisitos-titulo {
+            color: #5dade2;
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .requisitos-lista {
+            padding-left: 25px;
+            margin: 0;
+        }
+
+        .requisitos-lista li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -473,6 +499,57 @@
                 "Escolha seu herói, supere os obstáculos e conquiste o topo
                 do Multiverso em <strong>Multiverse Jump</strong>!"
             </p>
+            <!-- Card de Requisitos Funcionais -->
+
+            <div class="requisitos-card">
+                <h2 class="requisitos-titulo">Requisitos Funcionais</h2>
+
+                <ul class="requisitos-lista">
+                    <li>RF01 - Permitir que o jogador informe seu nome.</li>
+                    <li>RF02 - Permitir que o jogador escolha um personagem.</li>
+                    <li>RF03 - Salvar o personagem selecionado.</li>
+                    <li>RF04 - Permitir iniciar o jogo.</li>
+                    <li>RF05 - Permitir que o personagem pule durante a partida.</li>
+                    <li>RF06 - Exibir obstáculos durante o jogo.</li>
+                    <li>RF07 - Detectar colisões e encerrar a partida.</li>
+                    <li>RF08 - Contabilizar a pontuação do jogador.</li>
+                    <li>RF09 - Permitir coletar moedas para ganhar pontos.</li>
+                    <li>RF10 - Permitir coletar diamantes para ganhar pontos.</li>
+                    <li>RF11 - Aumentar a dificuldade conforme a pontuação.</li>
+                    <li>RF12 - Exibir a tela de Game Over.</li>
+                    <li>RF13 - Permitir reiniciar o jogo.</li>
+                    <li>RF14 - Permitir alterar o nome do jogador.</li>
+                    <li>RF15 - Permitir trocar de personagem.</li>
+                    <li>RF16 - Salvar a pontuação e o nome no banco de dados.</li>
+                    <li>RF17 - Exibir o ranking dos jogadores.</li>
+                    <li>RF18 - Atualizar o ranking após uma partida.</li>
+                    <li>RF19 - Reproduzir efeitos sonoros durante o jogo.</li>
+                    <li>RF20 - Exibir informações sobre o jogo.</li>
+                </ul>
+
+                </div>
+
+                <!-- Card de Requisitos Não Funcionais -->
+
+                <div class="requisitos-card">
+                    <h2 class="requisitos-titulo">Requisitos Não Funcionais</h2>
+
+                    <ul class="requisitos-lista">
+                        <li>RNF01 - O jogo deve ser fácil de utilizar.</li>
+                        <li>RNF02 - O jogo deve carregar e responder rapidamente.</li>
+                        <li>RNF03 - O sistema deve funcionar nos principais navegadores.</li>
+                        <li>RNF04 - A interface deve se adaptar a diferentes tamanhos de tela.</li>
+                        <li>RNF05 - O personagem selecionado deve ser mantido quando necessário.</li>
+                        <li>RNF06 - Os dados do ranking devem ser armazenados corretamente.</li>
+                        <li>RNF07 - O sistema deve validar os dados recebidos e proteger o banco de dados.</li>
+                        <li>RNF08 - O código deve ser organizado e fácil de manter.</li>
+                        <li>RNF09 - Os textos e controles devem ser legíveis e acessíveis.</li>
+                        <li>RNF10 - O jogo deve funcionar de forma estável.</li>
+                        <li>RNF11 - O sistema deve lidar adequadamente com falhas no armazenamento local.</li>
+                        <li>RNF12 - A navegação entre as páginas deve ser clara.</li>
+                    </ul>
+
+                </div>
 
         </section>
 
