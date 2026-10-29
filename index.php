@@ -49,6 +49,10 @@ try {
             <img src="assets/obstaculo.webp" class="pipe" alt="Cano">
             <span class="coin" id="coin">🪙</span>
             <span class="jump-tip" id="jump-tip">Pressione ESPAÇO ou clique para pular</span>
+            <div id="speed-warning" class="speed-warning" role="status">
+                PREPARE-SE!<br>
+                A VELOCIDADE VAI AUMENTAR!
+            </div>
         </main>
     </div>
 

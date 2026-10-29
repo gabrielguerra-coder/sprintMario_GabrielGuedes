@@ -9,68 +9,116 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #101b3d;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                background: #111422;
+                color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+            }
 
-        .selecao {
-            width: 90%;
-            max-width: 800px;
-            text-align: center;
-            padding: 30px 15px;
-        }
+            .selecao {
+                width: 90%;
+                max-width: 900px;
+                text-align: center;
+                padding: 25px 15px;
+                box-sizing: border-box;
+            }
 
-        .personagens {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-        }
+            .selecao h1 {
+                color: #7dd3fc;
+                font-size: 30px;
+                text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+            }
 
-        .personagem {
-            width: 190px;
-            min-height: 200px;
-            background: #23345f;
-            border: 3px solid transparent;
-            border-radius: 15px;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            transition: 0.2s;
-        }
+            .selecao p {
+                color: #dbeafe;
+                font-size: 16px;
+            }
 
-        .personagem:hover {
-            border-color: #58c7ff;
-            transform: translateY(-5px);
-        }
+            .personagens {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 18px;
+                margin: 25px 0;
+            }
 
-        .personagem img {
-            width: 130px;
-            height: 130px;
-            object-fit: contain;
-            image-rendering: pixelated;
-        }
-        .personagem h2 {
-            font-size: 20px;
-        }
+            .personagem {
+                width: 190px;
+                min-height: 200px;
+                background: #1f2438;
+                border: 2px solid #164e75;
+                border-radius: 12px;
+                color: #ffffff;
+                cursor: pointer;
+                padding: 15px;
+                transition: 0.2s;
+                box-sizing: border-box;
+            }
 
-        .voltar {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 12px 22px;
-            border-radius: 8px;
-            background: #465d91;
-            color: white;
-            text-decoration: none;
-        }
+            .personagem:hover {
+                border-color: #38bdf8;
+                background: #263653;
+                transform: translateY(-5px);
+                box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+            }
+
+            .personagem img {
+                width: 130px;
+                height: 130px;
+                object-fit: contain;
+                image-rendering: pixelated;
+            }
+
+            .personagem h2 {
+                color: #7dd3fc;
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            .voltar {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 12px 22px;
+                border: 2px solid #164e75;
+                border-radius: 8px;
+                background: #1f2438;
+                color: #7dd3fc;
+                text-decoration: none;
+                font-weight: bold;
+                transition: 0.2s;
+            }
+
+            .voltar:hover {
+                background: #263653;
+                border-color: #38bdf8;
+            }
+
+            @media (max-width: 600px) {
+                .selecao h1 {
+                    font-size: 24px;
+                }
+
+                .personagens {
+                    gap: 12px;
+                }
+
+                .personagem {
+                    width: 145px;
+                    min-height: 170px;
+                    padding: 10px;
+                }
+
+                .personagem img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
     </style>
 </head>
 

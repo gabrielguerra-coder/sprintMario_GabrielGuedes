@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPlayer = '';
     let score = 0;
     let isPlaying = false;
+    let currentSpeedLevel = 0;
     let gameLoop = null;
     let scoreLoop = null;
 
@@ -57,6 +58,29 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Inicia uma nova rodada
      */
+    function updateGameSpeed() {
+    let speed;
+
+        if (score >= 600) {
+            speed = 0.7;
+            currentSpeedLevel = 3;
+        } else if (score >= 300) {
+            speed = 1.0;
+            currentSpeedLevel = 2;
+        } else if (score >= 100) {
+            speed = 1.3;
+            currentSpeedLevel = 1;
+        } else {
+            speed = 1.6;
+            currentSpeedLevel = 0;
+        }
+
+        gameBoard.style.setProperty('--pipe-speed', `${speed}s`);
+    }
+
+
+
+
     function startGame() {
         // Limpa loops anteriores se existirem
         clearInterval(gameLoop);
@@ -68,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = true;
         score = 0;
         scoreDisplay.textContent = '0';
+        currentSpeedLevel = 0;
+        updateGameSpeed();
         coin.style.display = 'block';
         coin.style.animation = 'none';
 
@@ -84,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isPlaying) {
                 score += 1;
                 scoreDisplay.textContent = score;
+
+                updateGameSpeed();
             }
         }, 100);
 
@@ -199,30 +227,37 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(gameLoop);
         clearInterval(scoreLoop);
 
-        
         gameBoard.classList.remove('running');
 
-        
+        // Congela o obstáculo no local da colisão
         pipe.style.animation = 'none';
         pipe.style.left = `${pipePosition}px`;
+        pipe.style.right = 'auto';
 
-        // Congela o Mario na altura exata e muda para a imagem de Game Over
+        // Mostra a explosão no lugar do personagem
         tails.style.animation = 'none';
         tails.style.bottom = `${tailsPosition}px`;
-        tails.src = 'assets/game-over.png';
-        tails.style.width = '75px';
-        tails.style.marginLeft = '50px';
+        tails.src = 'assets/explosao.gif';
+        tails.style.width = '150px';
+        tails.style.marginLeft = '0px';
+        tails.classList.remove('jump');
 
-        // Atualiza modal de Game Over
-        finalScoreValue.textContent = score;
-        saveStatusMsg.textContent = 'Salvando pontuação no banco...';
-        saveStatusMsg.style.color = '#ffcc00';
+        // Aguarda a explosão antes de abrir o Game Over
+        setTimeout(() => {
+            tails.src = 'assets/game-over.png';
+            tails.style.width = '75px';
+            tails.style.marginLeft = '50px';
 
-        // Abre modal de Game Over
-        gameoverModal.classList.add('active');
+            // Atualiza a tela de Game Over
+            finalScoreValue.textContent = score;
+            saveStatusMsg.textContent = 'Salvando pontuação no banco...';
+            saveStatusMsg.style.color = '#ffcc00';
 
-        // Salva a pontuação no banco MySQL via PHP
-        saveScore(currentPlayer, score);
+            gameoverModal.classList.add('active');
+
+            // Salva a pontuação
+            saveScore(currentPlayer, score);
+        }, 800);
     }
 
 

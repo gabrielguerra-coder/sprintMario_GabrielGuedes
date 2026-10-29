@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #111422;
+    background: #030712;
     font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
     color: #ffffff;
     min-height: 100vh;
@@ -30,8 +30,8 @@ body {
 /* Barra Superior (HUD) */
 .hud-bar {
     width: 100%;
-    background: linear-gradient(180deg, #2b3044 0%, #1a1e2d 100%);
-    border: 3px solid #ffcc00;
+    background: linear-gradient(180deg, #10264a, #071326);
+    border: 3px solid #38bdf8;
     border-bottom: none;
     border-radius: 12px 12px 0 0;
     padding: 12px 24px;
@@ -116,7 +116,7 @@ body {
 
 /* Animações ativas durante o jogo */
 .game-board.running .pipe {
-    animation: pipe-animation 1.6s infinite linear;
+    animation: pipe-animation var(--pipe-speed, 1.6s) infinite linear;
 }
 
 .game-board.running .clouds {
@@ -182,14 +182,14 @@ body {
 }
 
 .modal-card {
-    background: #1f2438;
-    border: 4px solid #e52521;
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;
-    max-width: 480px;
+    background: #081426;
+    border: 3px solid #38bdf8;
+    border-radius: 14px;
+    padding: 22px;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
-    box-shadow: 0 0 30px rgba(229, 37, 33, 0.4), 0 15px 40px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 .modal-header {
@@ -198,10 +198,10 @@ body {
 
 .game-title {
     font-family: 'Press Start 2P', cursive;
-    color: #ffce00;
+    color: #7dd3fc;
     font-size: 20px;
     line-height: 1.5;
-    text-shadow: 3px 3px #e52521, 6px 6px #000000;
+    text-shadow: 2px 2px #000000;
     margin-bottom: 12px;
 }
 
@@ -270,9 +270,9 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(180deg, #e52521 0%, #b81410 100%);
+    background: linear-gradient(180deg, #38bdf8, #075985);
     color: #ffffff;
-    border-bottom: 4px solid #7a0b08;
+    border-bottom: 4px solid #043b5b;
 }
 
 .btn-primary:hover {
@@ -287,9 +287,9 @@ body {
 }
 
 .btn-secondary {
-    background: #2f3752;
-    color: #cbd5e1;
-    border-bottom: 4px solid #1a1e2f;
+background: #10264a;
+color: #bae6fd;
+border-bottom: 4px solid #030712;
 }
 
 .btn-secondary:hover {
@@ -332,11 +332,11 @@ body {
 }
 
 .gameover-title {
-    font-family: 'Press Start 2P', cursive;
-    color: #e52521;
-    font-size: 26px;
-    text-shadow: 3px 3px #000;
-    margin-bottom: 10px;
+font-family: 'Press Start 2P', cursive;
+color: #38bdf8;
+font-size: 22px;
+text-shadow: 2px 2px #000000;
+margin-bottom: 10px;
 }
 
 .final-score-box {
@@ -571,7 +571,104 @@ body {
     z-index: 5;
     pointer-events: none;
 }
-/* Obstáculo do cenário do Luffy */
+/* Barril do Luffy encostado no chão */
 .game-board.luffy-world .pipe {
     content: url('../assets/barril.webp');
+    bottom: -5px;
+    width: 80px;
+}
+/* JOGO OCUPANDO A TELA INTEIRA */
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+.game-container {
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    align-items: stretch;
+}
+
+.hud-bar {
+        border-radius: 0;
+}
+
+.game-board {
+    width: 100%;
+    height: calc(100vh - 65px);
+    min-height: 400px;
+    flex: 1;
+    border-radius: 0;
+    margin: 0;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    .game-board {
+    height: calc(100vh - 55px);
+    min-height: 350px;
+    }
+}
+/* Diminuir a tela de Game Over para não ficar cortada */
+#gameover-modal {
+    padding: 12px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#gameover-modal .gameover-card {
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 18px;
+}
+
+#gameover-modal .gameover-title {
+    font-size: 28px;
+    margin: 5px 0 10px;
+}
+.speed-warning {
+    display: none;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    padding: 18px;
+    box-sizing: border-box;
+    background: #111422;
+    color: #7dd3fc;
+    border: 3px solid #38bdf8;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.4);
+}
+
+.speed-warning.active {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .speed-warning {
+    font-size: 18px;
+    padding: 12px;
+    }
 }
