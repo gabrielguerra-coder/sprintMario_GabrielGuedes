@@ -311,6 +311,56 @@
             margin-bottom: 12px;
             line-height: 1.6;
         }
+        .footer {
+            width: 100%;
+            margin-top: 50px;
+            background: #07152f;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px 15px;
+            box-sizing: border-box;
+            border-top: 2px solid #2e4e9a;
+        }
+
+        .footer-conteudo h3 {
+            color: #5dade2;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .footer-conteudo p {
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a {
+            color: #5dade2;
+        }
+
+        .footer-direitos {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 15px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .footer-direitos p {
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -554,6 +604,22 @@
         </section>
 
     </main>
+    <footer class="footer">
+        <div class="footer-conteudo">
+            <h3>Multiverse Jump</h3>
+            <p>Explore diferentes mundos e supere seus limites!</p>
+
+            <div class="footer-links">
+                <a href="index.php">Início</a>
+                <a href="sobrenos.php">Sobre Nós</a>
+            </div>
+        </div>
+
+        <div class="footer-direitos">
+            <p>&copy; <?php echo date("Y"); ?> Multiverse Jump. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
 
     
 
