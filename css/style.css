@@ -487,6 +487,13 @@ margin-bottom: 10px;
     background-position: center;
     background-repeat: no-repeat;
 }
+/* Cenário do Shadow */
+.game-board.shadow-world {
+    background-image: url('../assets/sonic-fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 /* Cenário do Luffy */
 .game-board.luffy-world {
@@ -512,6 +519,10 @@ margin-bottom: 10px;
 }
 /* Ajuste da posição do Sonic */
 .game-board .tails.character-sonic {
+    transform: translateY(18px);
+}
+/* Ajuste da posição do Shadow */
+.game-board .tails.character-shadow {
     transform: translateY(18px);
 }
 /* Diminui o tamanho do Luffy */
@@ -699,4 +710,8 @@ body {
     to {
         right: 100%;
     }
+}
+/* Tamanho do Shadow igual ao tamanho padrão do Sonic */
+.game-board .tails.character-shadow {
+    width: 150px;
 }

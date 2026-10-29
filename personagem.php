@@ -149,6 +149,12 @@
             <img src="assets/sonic.gif" alt="Sonic">
             <h2>Sonic</h2>
         </button>
+        <!-- Shadow -->
+        <button class="personagem" type="button"
+            onclick="escolherPersonagem('Shadow', 'assets/shadow.gif')">
+            <img src="assets/shadow.gif" alt="Shadow">
+            <h2>Shadow</h2>
+        </button>
 
         <!-- Yoshi -->
         <button class="personagem" type="button"

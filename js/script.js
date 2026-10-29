@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const tails = document.querySelector('.tails');
     const pipe = document.querySelector('.pipe');
     const coin = document.getElementById('coin');
+    const explosionSound = new Audio('assets/som-explosao.mp3');
+    explosionSound.preload = 'auto';
+    // Som tocado quando o personagem pula
+    const jumpSound = new Audio('assets/som-pulo.mp3');
+    jumpSound.preload = 'auto';
+    // Som tocado quando o jogador coleta uma moeda
+    const coinSound = new Audio('assets/som-moeda.mp3');
+    coinSound.preload = 'auto';
     const diamond = document.getElementById('diamond');
     let diamondLoop = null;
 
@@ -165,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 coin.style.animation = '';
                 coin.style.display = 'block';
             }
-        }, );
+        }, 1000);
     }
 
 
@@ -242,12 +250,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ajusta cada personagem
         tails.classList.toggle('character-sonic', nome === 'sonic');
         tails.classList.toggle('character-luffy', nome === 'luffy');
+        tails.classList.toggle('character-shadow', nome === 'shadow');
         
 
         // Ativa o cenário correspondente
         gameBoard.classList.toggle(
             'sonic-world',
             nome === 'sonic'
+        );
+        gameBoard.classList.toggle(
+            'shadow-world',
+            nome === 'shadow'
         );
 
         gameBoard.classList.toggle(
@@ -268,6 +281,12 @@ document.addEventListener('DOMContentLoaded', () => {
         tails.style.bottom = '0px';
         tails.style.width = '';
         tails.style.marginLeft = '';
+        // Ajusta a posição do Shadow
+        if (personagemNome.toLowerCase().trim() === 'shadow') {
+            tails.style.width = '150px';
+            tails.style.height = 'auto';
+            tails.style.bottom = '-12px';
+        }
         tails.classList.remove('jump');
 
         if (jumpTip) {
@@ -279,6 +298,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isPlaying) return;
         if (tails.classList.contains('jump')) return;
 
+        // Toca o som do pulo
+        jumpSound.currentTime = 0;
+        jumpSound.play().catch(erro => {
+            console.log('Não foi possível tocar o som do pulo:', erro);
+        });
+
         tails.classList.add('jump');
 
         if (jumpTip) {
@@ -288,6 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             tails.classList.remove('jump');
         }, 500);
+
     }
 
     function checkCollision() {
@@ -319,8 +345,17 @@ document.addEventListener('DOMContentLoaded', () => {
             personagemRect.top < moedaRect.bottom &&
             personagemRect.bottom > moedaRect.top
         ) {
+            // Adiciona os pontos
             score += 15;
             scoreDisplay.textContent = score;
+
+            // Toca o som da moeda
+            coinSound.currentTime = 0;
+            coinSound.play().catch(erro => {
+                console.log('Não foi possível tocar o som:', erro);
+            });
+
+            // Esconde a moeda coletada
             coin.style.display = 'none';
 
             setTimeout(() => {
@@ -330,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     void coin.offsetWidth;
                     coin.style.animation = '';
                 }
-            }, 3000);
+            }, 1000);
     }
 
     // Verifica se pegou o diamante
@@ -372,6 +407,13 @@ document.addEventListener('DOMContentLoaded', () => {
         tails.style.width = '150px';
         tails.style.marginLeft = '0px';
         tails.classList.remove('jump');
+
+        explosionSound.pause();
+        explosionSound.currentTime = 0;
+
+        explosionSound.play().catch((erro) => {
+            console.error('Erro ao tocar o som da explosão:', erro);
+    });
 
         // Aguarda a explosão antes de abrir o Game Over
         setTimeout(() => {
