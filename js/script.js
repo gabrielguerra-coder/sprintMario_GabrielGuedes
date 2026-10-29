@@ -244,6 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pipe.style.left = '';
         tails.src = personagemImagem;
         tails.alt = personagemNome;
+        tails.style.display = 'block';
+        tails.style.width = '150px';
+        tails.style.marginLeft = '0px';
+        tails.classList.remove('jump');
 
         // Identifica o personagem escolhido
         const nome = personagemNome.toLowerCase().trim();
@@ -251,27 +255,31 @@ document.addEventListener('DOMContentLoaded', () => {
         tails.classList.toggle('character-sonic', nome === 'sonic');
         tails.classList.toggle('character-luffy', nome === 'luffy');
         tails.classList.toggle('character-shadow', nome === 'shadow');
+        tails.classList.toggle('character-tails', nome === 'tails');
         
 
-        // Ativa o cenário correspondente
-        gameBoard.classList.toggle(
+        // Remove os cenários anteriores
+        gameBoard.classList.remove(
             'sonic-world',
-            nome === 'sonic'
-        );
-        gameBoard.classList.toggle(
+            'tails-world',
             'shadow-world',
-            nome === 'shadow'
-        );
-
-        gameBoard.classList.toggle(
             'luffy-world',
-            nome === 'luffy'
+            'espaco-world'
         );
 
-        gameBoard.classList.toggle(
-            'espaco-world',
-            nome === 'among'
-        );
+        // Ativa o cenário correto
+        if (nome === 'sonic' || nome === 'tails') {
+            gameBoard.classList.add('sonic-world');
+        }
+        else if (nome === 'shadow') {
+            gameBoard.classList.add('shadow-world');
+        }
+        else if (nome === 'luffy') {
+            gameBoard.classList.add('luffy-world');
+        }
+        else if (nome === 'among') {
+            gameBoard.classList.add('espaco-world');
+        }
 
         // Reseta Mario
         // Restaura o personagem escolhido
@@ -417,9 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Aguarda a explosão antes de abrir o Game Over
         setTimeout(() => {
-            tails.src = 'assets/game-over.png';
-            tails.style.width = '75px';
-            tails.style.marginLeft = '50px';
+            tails.style.display = 'none';
 
             // Atualiza a tela de Game Over
             finalScoreValue.textContent = score;

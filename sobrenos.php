@@ -61,11 +61,14 @@
         }
 
         /* ÁREA PRINCIPAL */
+        /* Área que organiza os cards na vertical */
         .sobre-container {
             width: 100%;
             padding: 25px 20px 40px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
         }
 
         /* CARD PRINCIPAL */
@@ -181,6 +184,105 @@
             .sobre-lista {
                 grid-template-columns: 1fr;
                 gap: 22px;
+            }
+        }
+        /* CARD MULTIVERSE JUMP */
+        .multiverse-card {
+            width: 100%;
+            max-width: 1160px;
+            padding: 35px;
+            background: linear-gradient(145deg, #031b43, #001638);
+            border: 5px solid #087cff;
+            border-radius: 30px;
+            box-shadow: 0 0 25px rgba(0, 123, 255, 0.25);
+            margin-top: 30px;
+        }
+
+        /* TÍTULO DO MULTIVERSE JUMP */
+        .multiverse-titulo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #19baff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+        }
+
+        /* TEXTOS DO JOGO */
+        .multiverse-card p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #e3edff;
+            margin-bottom: 18px;
+        }
+
+        /* TÍTULO DOS DESTAQUES */
+        .multiverse-subtitulo {
+            color: #ffffff;
+            font-size: 24px;
+            margin: 25px 0 20px;
+        }
+
+        /* LISTA DE DESTAQUES */
+        .multiverse-lista {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .multiverse-lista li {
+            color: #e3edff;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: rgba(8, 124, 255, 0.10);
+            border-left: 4px solid #19baff;
+            border-radius: 8px;
+        }
+
+        .multiverse-lista strong {
+            color: #19baff;
+        }
+
+        /* FRASE FINAL */
+        .multiverse-frase {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(8, 124, 255, 0.15);
+            border: 2px solid #087cff;
+            border-radius: 12px;
+            text-align: center;
+            color: #19baff !important;
+            font-size: 19px !important;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* AJUSTES PARA CELULARES */
+        @media (max-width: 768px) {
+            .multiverse-card {
+                padding: 22px 18px;
+                border-width: 3px;
+                border-radius: 20px;
+            }
+
+            .multiverse-titulo {
+                font-size: 25px;
+            }
+
+            .multiverse-subtitulo {
+                font-size: 21px;
+            }
+
+            .multiverse-card p,
+            .multiverse-lista li {
+                font-size: 15px;
+            }
+
+            .multiverse-frase {
+                font-size: 16px !important;
             }
         }
     </style>
@@ -306,7 +408,77 @@
 
         </section>
 
+        <!-- CARD MULTIVERSE JUMP -->
+        <section class="multiverse-card">
+
+            <h2 class="multiverse-titulo">
+                🎮 Multiverse Jump
+            </h2>
+
+            <p>
+                <strong class="destaque">Multiverse Jump</strong> é o jogo
+                principal da <strong class="destaque">Infinity Jump Games</strong>,
+                onde diferentes universos se encontram em um desafio de
+                corrida e pulos sem fim!
+            </p>
+
+            <p>
+                Em um único lugar, você pode jogar com os seus personagens
+                favoritos dos games e da cultura pop. Escolha entre ícones
+                lendários como <strong>Mario</strong>, <strong>Sonic</strong>,
+                <strong>Shadow</strong>, <strong>Tails</strong>,
+                <strong>Yoshi</strong> e até o intrépido
+                <strong>Among Us</strong>! Cada corrida é uma nova oportunidade
+                de testar seus reflexos, desviar de obstáculos dinâmicos,
+                coletar moedas e diamantes valiosos e alcançar pontuações
+                astronômicas.
+            </p>
+
+            <!-- DESTAQUES DO JOGO -->
+            <h3 class="multiverse-subtitulo">
+                ⭐ Destaques do Jogo
+            </h3>
+
+            <ul class="multiverse-lista">
+
+                <li>
+                    <strong>🎭 Elenco Multiverso:</strong>
+                    Jogue com diversos personagens clássicos e modernos,
+                    cada um com cenários e visuais personalizados
+                    (como o chão lunar exclusivo do Among Us!).
+                </li>
+
+                <li>
+                    <strong>⚡ Velocidade Progressiva:</strong>
+                    Conforme você ganha mais pontos, a velocidade do jogo
+                    aumenta, colocando a sua reação à prova.
+                </li>
+
+                <li>
+                    <strong>💎 Coletáveis Mágicos:</strong>
+                    Pegue moedas e diamantes ao longo da corrida para
+                    alavancar sua pontuação.
+                </li>
+
+                <li>
+                    <strong>🏆 Ranking Global TOP 10:</strong>
+                    Dispute o topo da tabela com outros jogadores e prove
+                    quem é o verdadeiro mestre dos pulos!
+                </li>
+
+            </ul>
+
+            <!-- FRASE FINAL -->
+            <p class="multiverse-frase">
+                "Escolha seu herói, supere os obstáculos e conquiste o topo
+                do Multiverso em <strong>Multiverse Jump</strong>!"
+            </p>
+
+        </section>
+
     </main>
+
+    
 
 </body>
 </html>

@@ -155,6 +155,9 @@ try {
                         PERSONAGEM
                 </button>
                 <button type="button" class="btn btn-secondary" id="btn-change-player">TROCAR JOGADOR</button>
+                <a href="sobrenos.php" target="_blank" class="btn btn-secondary">
+                    SOBRE NÓS
+                </a>
             </div>
         </div>
     </div>

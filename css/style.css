@@ -487,6 +487,12 @@ margin-bottom: 10px;
     background-position: center;
     background-repeat: no-repeat;
 }
+.game-board.tails-world {
+    background-image: url('../assets/sonic-fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 /* Cenário do Shadow */
 .game-board.shadow-world {
     background-image: url('../assets/sonic-fundo.jpg');
@@ -513,6 +519,7 @@ margin-bottom: 10px;
 
 /* Remove as nuvens dos cenários especiais */
 .game-board.sonic-world .clouds,
+.game-board.tails-world .clouds,
 .game-board.luffy-world .clouds,
 .game-board.espaco-world .clouds {
     display: none;
