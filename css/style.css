@@ -672,3 +672,8 @@ body {
     padding: 12px;
     }
 }
+/* Esconde moeda e obstáculo durante o aviso */
+.game-board.speed-paused .coin,
+.game-board.speed-paused .pipe {
+    display: none !important;
+}

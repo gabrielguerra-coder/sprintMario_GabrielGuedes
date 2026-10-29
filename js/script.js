@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSpeedLevel = 0;
     let gameLoop = null;
     let scoreLoop = null;
+    let isSpeedPause = false;
+    let speedPauseTimeout = null;
 
     // Recupera último nome utilizado caso exista
     const savedName = localStorage.getItem('tails_jump_player');
@@ -59,25 +61,109 @@ document.addEventListener('DOMContentLoaded', () => {
      * Inicia uma nova rodada
      */
     function updateGameSpeed() {
-    let speed;
+        let speed;
+        let newSpeedLevel;
 
         if (score >= 600) {
             speed = 0.7;
-            currentSpeedLevel = 3;
+            newSpeedLevel = 3;
         } else if (score >= 300) {
             speed = 1.0;
-            currentSpeedLevel = 2;
-        } else if (score >= 100) {
+            newSpeedLevel = 2;
+        }else if (score >= 100) {
             speed = 1.3;
-            currentSpeedLevel = 1;
+            newSpeedLevel = 1;
         } else {
             speed = 1.6;
-            currentSpeedLevel = 0;
+            newSpeedLevel = 0;
         }
 
         gameBoard.style.setProperty('--pipe-speed', `${speed}s`);
-    }
 
+        if (newSpeedLevel > currentSpeedLevel && isPlaying) {
+            currentSpeedLevel = newSpeedLevel;
+            pauseForSpeedChange();
+        } else {
+            currentSpeedLevel = newSpeedLevel;
+        }
+    }
+    function pauseForSpeedChange() {
+        if (!isPlaying) return;
+
+        isSpeedPause = true;
+        gameBoard.classList.add('speed-paused');
+        coin.style.display = 'none';
+        pipe.style.visibility = 'hidden';
+        // Esconde a moeda.
+        coin.style.display = 'none';
+
+        // Esconde o obstáculo.
+        pipe.style.visibility = 'hidden';
+        pipe.style.animation = 'none';
+        pipe.style.left = '';
+        pipe.style.right = '';
+
+        // Para os obstáculos.
+        pipe.style.animationPlayState = 'paused';
+
+        // Cria o aviso na tela.
+        let warning = document.getElementById('speed-warning');
+
+        if (!warning) {
+            warning = document.createElement('div');
+            warning.id = 'speed-warning';
+            gameBoard.appendChild(warning);
+        }
+
+        warning.textContent =
+            'PREPARE-SE! A VELOCIDADE VAI AUMENTAR!';
+
+        Object.assign(warning.style, {
+            display: 'block',
+            position: 'absolute',
+            top: '35%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80%',
+            padding: '18px',
+            background: '#111422',
+            color: '#7dd3fc',
+            border: '3px solid #38bdf8',
+            borderRadius: '12px',
+            textAlign: 'center',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            zIndex: '10'
+        });
+
+        clearTimeout(speedPauseTimeout);
+
+        speedPauseTimeout = setTimeout(() => {
+            warning.style.display = 'none';
+            isSpeedPause = false;
+            gameBoard.classList.remove('speed-paused');
+
+            if (isPlaying) {
+                // Prepara o obstáculo para começar da direita.
+                pipe.style.animation = 'none';
+                pipe.style.left = '';
+                pipe.style.right = '';
+                pipe.style.visibility = 'visible';
+
+                // Prepara a moeda para começar novamente.
+                coin.style.display = 'none';
+                coin.style.animation = 'none';
+
+                // Reinicia as animações.
+                void pipe.offsetWidth;
+                void coin.offsetWidth;
+
+                pipe.style.animation = '';
+                coin.style.animation = '';
+                coin.style.display = 'block';
+            }
+        }, 3000);
+    }
 
 
 
@@ -85,6 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Limpa loops anteriores se existirem
         clearInterval(gameLoop);
         clearInterval(scoreLoop);
+        clearTimeout(speedPauseTimeout);
+        isSpeedPause = false;
 
         // Reseta posições e visuais
         resetElements();
@@ -123,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetElements() {
         // Reseta cano
         pipe.style.animation = '';
+        pipe.style.animationPlayState = 'running';
         pipe.style.left = '';
         tails.src = personagemImagem;
         tails.alt = personagemNome;
