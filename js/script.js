@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tails = document.querySelector('.tails');
     const pipe = document.querySelector('.pipe');
     const coin = document.getElementById('coin');
+    const diamond = document.getElementById('diamond');
+    let diamondLoop = null;
 
     // Recupera o personagem escolhido na página personagem.php
     const personagemEscolhido =
@@ -96,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pipe.style.visibility = 'hidden';
         // Esconde a moeda.
         coin.style.display = 'none';
+        diamond.style.display = 'none';
 
         // Esconde o obstáculo.
         pipe.style.visibility = 'hidden';
@@ -162,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 coin.style.animation = '';
                 coin.style.display = 'block';
             }
-        }, 3000);
+        }, );
     }
 
 
@@ -178,6 +181,24 @@ document.addEventListener('DOMContentLoaded', () => {
         resetElements();
 
         isPlaying = true;
+        // Esconde o diamante no começo da partida.
+        diamond.style.display = 'none';
+
+        // Para o temporizador anterior.
+        clearInterval(diamondLoop);
+
+        // Faz aparecer um diamante a cada 10 segundos.
+        diamondLoop = setInterval(() => {
+            if (isPlaying && !isSpeedPause) {
+                diamond.style.display = 'block';
+                diamond.style.animation = 'none';
+
+                // Faz a animação começar novamente.
+                void diamond.offsetWidth;
+
+                diamond.style.animation = '';
+            }
+        }, 8000);
         score = 0;
         scoreDisplay.textContent = '0';
         currentSpeedLevel = 0;
@@ -273,13 +294,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isPlaying) return;
 
         const pipePosition = pipe.offsetLeft;
-        const tailsPosition = +window.getComputedStyle(tails).bottom.replace('px', '');
+        const tailsPosition = parseFloat(
+        window.getComputedStyle(tails).bottom
+        );
 
-        // Tolerância de colisão: quando o cano está na faixa de contato com o Mario
-        if (pipePosition <= 120 && pipePosition > 0 && tailsPosition < 80) {
+        // Verifica se bateu no obstáculo
+        if (
+            pipePosition <= 120 &&
+            pipePosition > 0 &&
+            tailsPosition < 80
+        ) {
             triggerGameOver(pipePosition, tailsPosition);
+            return;
         }
-        // Verifica se o personagem pegou a moeda
+
+        // Verifica se pegou a moeda
         const personagemRect = tails.getBoundingClientRect();
         const moedaRect = coin.getBoundingClientRect();
 
@@ -290,31 +319,44 @@ document.addEventListener('DOMContentLoaded', () => {
             personagemRect.top < moedaRect.bottom &&
             personagemRect.bottom > moedaRect.top
         ) {
-            // Adiciona 15 pontos
             score += 15;
             scoreDisplay.textContent = score;
-
-            // Esconde a moeda que foi coletada
             coin.style.display = 'none';
 
-            // Faz outra moeda aparecer depois de um tempinho
             setTimeout(() => {
                 if (isPlaying) {
                     coin.style.display = 'block';
                     coin.style.animation = 'none';
-
                     void coin.offsetWidth;
-
                     coin.style.animation = '';
                 }
-            }, 1000);
+            }, 3000);
+    }
+
+    // Verifica se pegou o diamante
+    if (diamond.style.display !== 'none') {
+        const personagemRect = tails.getBoundingClientRect();
+        const diamondRect = diamond.getBoundingClientRect();
+
+        if (
+            personagemRect.left < diamondRect.right &&
+            personagemRect.right > diamondRect.left &&
+            personagemRect.top < diamondRect.bottom &&
+            personagemRect.bottom > diamondRect.top
+        ) {
+            score += 50;
+            scoreDisplay.textContent = score;
+            diamond.style.display = 'none';
         }
     }
+}
 
     function triggerGameOver(pipePosition, tailsPosition) {
         isPlaying = false;
         clearInterval(gameLoop);
         clearInterval(scoreLoop);
+        clearInterval(diamondLoop);
+        diamond.style.display = 'none';
 
         gameBoard.classList.remove('running');
 

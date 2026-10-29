@@ -677,3 +677,26 @@ body {
 .game-board.speed-paused .pipe {
     display: none !important;
 }
+/* Diamante mágico */
+.diamond {
+    display: none;
+    position: absolute;
+    right: -60px;
+    bottom: 120px;
+    font-size: 40px;
+    z-index: 15;
+}
+
+/* Movimento do diamante */
+.game-board.running .diamond {
+    animation: diamond-move 5s linear forwards;
+}
+
+@keyframes diamond-move {
+    from {
+        right: -60px;
+    }
+    to {
+        right: 100%;
+    }
+}
