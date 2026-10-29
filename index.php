@@ -47,6 +47,7 @@ try {
             <img src="assets/clouds.png" class="clouds" alt="Nuvens">
             <img src="assets/tails.gif" class="tails" alt="tails">
             <img src="assets/obstaculo.webp" class="pipe" alt="Cano">
+            <span class="coin" id="coin">🪙</span>
             <span class="jump-tip" id="jump-tip">Pressione ESPAÇO ou clique para pular</span>
         </main>
     </div>

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Elementos do Jogo
     const tails = document.querySelector('.tails');
     const pipe = document.querySelector('.pipe');
+    const coin = document.getElementById('coin');
 
     // Recupera o personagem escolhido na página personagem.php
     const personagemEscolhido =
@@ -67,6 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = true;
         score = 0;
         scoreDisplay.textContent = '0';
+        coin.style.display = 'block';
+        coin.style.animation = 'none';
+
+        void coin.offsetWidth;
+
+        coin.style.animation = '';
         hudPlayerName.textContent = currentPlayer || 'Jogador';
 
         // Ativa animações CSS do jogo
@@ -92,10 +99,27 @@ document.addEventListener('DOMContentLoaded', () => {
         tails.src = personagemImagem;
         tails.alt = personagemNome;
 
-        // Troca o cenário conforme o personagem escolhido
+        // Identifica o personagem escolhido
+        const nome = personagemNome.toLowerCase().trim();
+        // Ajusta cada personagem
+        tails.classList.toggle('character-sonic', nome === 'sonic');
+        tails.classList.toggle('character-luffy', nome === 'luffy');
+        
+
+        // Ativa o cenário correspondente
         gameBoard.classList.toggle(
             'sonic-world',
-            personagemNome.toLowerCase() === 'sonic'
+            nome === 'sonic'
+        );
+
+        gameBoard.classList.toggle(
+            'luffy-world',
+            nome === 'luffy'
+        );
+
+        gameBoard.classList.toggle(
+            'espaco-world',
+            nome === 'among'
         );
 
         // Reseta Mario
@@ -137,6 +161,36 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tolerância de colisão: quando o cano está na faixa de contato com o Mario
         if (pipePosition <= 120 && pipePosition > 0 && tailsPosition < 80) {
             triggerGameOver(pipePosition, tailsPosition);
+        }
+        // Verifica se o personagem pegou a moeda
+        const personagemRect = tails.getBoundingClientRect();
+        const moedaRect = coin.getBoundingClientRect();
+
+        if (
+            coin.style.display !== 'none' &&
+            personagemRect.left < moedaRect.right &&
+            personagemRect.right > moedaRect.left &&
+            personagemRect.top < moedaRect.bottom &&
+            personagemRect.bottom > moedaRect.top
+        ) {
+            // Adiciona 15 pontos
+            score += 15;
+            scoreDisplay.textContent = score;
+
+            // Esconde a moeda que foi coletada
+            coin.style.display = 'none';
+
+            // Faz outra moeda aparecer depois de um tempinho
+            setTimeout(() => {
+                if (isPlaying) {
+                    coin.style.display = 'block';
+                    coin.style.animation = 'none';
+
+                    void coin.offsetWidth;
+
+                    coin.style.animation = '';
+                }
+            }, 1000);
         }
     }
 

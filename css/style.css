@@ -495,10 +495,83 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-/* Cenário espacial */
+
+/* Cenário espacial do ETE */
 .game-board.espaco-world {
-    background-image: url('../assets/fundo-ete.jpg');
+    background-image: url('../assets/espaco-estrela.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* Remove as nuvens dos cenários especiais */
+.game-board.sonic-world .clouds,
+.game-board.luffy-world .clouds,
+.game-board.espaco-world .clouds {
+    display: none;
+}
+/* Ajuste da posição do Sonic */
+.game-board .tails.character-sonic {
+    transform: translateY(18px);
+}
+/* Diminui o tamanho do Luffy */
+.game-board .tails.character-luffy {
+    width: 105px;
+}
+
+@media (max-width: 600px) {
+    .game-board .tails.character-luffy {
+        width: 85px;
+    }
+}
+/* Moeda do jogo */
+.coin {
+    position: absolute;
+    bottom: 100px;
+    right: -50px;
+    font-size: 35px;
+    z-index: 15;
+    display: none;
+}
+
+/* Movimento da moeda */
+.game-board.running .coin {
+    display: block;
+    animation: moeda-andando 4s linear infinite;
+}
+
+@keyframes moeda-andando {
+    from {
+        right: -50px;
+    }
+
+    to {
+        right: 100%;
+    }
+}
+.game-board.espaco-world {
+    border-bottom: 20px solid #f5f5f5;
+    box-sizing: border-box;
+}
+/* Detalhes cinza que lembram crateras da Lua */
+.game-board.espaco-world::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    bottom: -20px;
+    background-color: #f5f5f5;
+    background-image:
+        radial-gradient(ellipse at 15px 12px, #bdbdbd 0 5px, transparent 6px),
+        radial-gradient(ellipse at 55px 5px, #d0d0d0 0 7px, transparent 8px),
+        radial-gradient(ellipse at 100px 15px, #c5c5c5 0 4px, transparent 5px);
+    background-size: 120px 20px;
+    z-index: 5;
+    pointer-events: none;
+}
+/* Obstáculo do cenário do Luffy */
+.game-board.luffy-world .pipe {
+    content: url('../assets/barril.webp');
 }

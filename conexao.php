@@ -26,7 +26,7 @@
         $pdo->exec(
             "CREATE TABLE IF NOT EXISTS `ranking` (
             `id` INT AUTO_INCREMENT PRIMARY KEY,
-            `nome` VARCHAR(60) NOT NULL,
+            `nome` VARCHAR(50) NOT NULL,
             `pontos` INT NOT NULL,
             `data_registro` TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"
             );

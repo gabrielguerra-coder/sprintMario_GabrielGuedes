@@ -117,9 +117,9 @@
         </button>
 
         <button class="personagem" type="button"
-            onclick="escolherPersonagem('ete', 'assets/ete.gif')">
-            <img src="assets/ete.gif" alt="ete">
-            <h2>Ete</h2>
+            onclick="escolherPersonagem('among', 'assets/amongus.gif')">
+            <img src="assets/amongus.gif" alt="among">
+            <h2>Among us</h2>
         </button>
 
         </div>
